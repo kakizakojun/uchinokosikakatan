@@ -26,7 +26,10 @@
     <% end %>
   <% end %>
 </div>
-<div>
+<div class=<%= "favorite-" + @post.id.to_s %>>
+  <%= render "public/favorites/btn", post: @post %>
+</div>
+<div class="book">
   <%= form_with model: [@post, @comment] do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
