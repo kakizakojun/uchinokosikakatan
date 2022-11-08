@@ -6,11 +6,41 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-brand"><%= link_to "うちの子しか勝たん", root_path %></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if admin_signed_in? %>
+          <div class="navbar-right">
+            <ul class="nav navbar-nav">
+              <li class="nav-item"><%= link_to "HOME", admin_top_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to "User一覧", admin_users_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete , class: 'nav-link' %></li>
+            <% elsif user_signed_in? %>
+              <li class="nav-item"><%= link_to "HOME", mypage_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to "新規投稿", new_post_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+            <% else %>
+              <li class="nav-item"><%= link_to "HOME", root_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to "ログイン", new_user_session_path, class: 'nav-link' %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
     <%= yield %>
+    <footer class="bg-dark fixed-bottom">
+      <div class="container">フッター</div>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,8 @@
+<h2>Topページ</h2>
+
+
+<div><%= link_to "新規登録", new_user_registration_path %></div>
+<div><%= link_to "userログイン", new_user_session_path %></div>
+<div><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %></div>
+<div><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+<div><%= link_to "新規投稿", new_post_path %></div>

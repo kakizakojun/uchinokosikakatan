@@ -1,0 +1,7 @@
+<%= form_with model: post do |f| %>
+  <h4>画像</h4>
+  <%= f.file_field :medias, multiple: true %>
+  <h4>説明</h4>
+  <%= f.text_field :caption %>
+  <%= f.submit submit %>
+<% end %>
