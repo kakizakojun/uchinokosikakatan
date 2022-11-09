@@ -15,23 +15,30 @@
     <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"} %>
   <% end %>
 </div>
-<div>
-  <p>コメント件数：<%= @post.comments.count %></p>
-  <% @post.comments.each do |comment| %>
-    <p><%= image_tag comment.user.get_profile_image, size: "50x50" %></p>
-    <%= comment.created_at.strftime('%Y/%m/%d') %>
-    <%= comment.comment %>
-    <% if comment.user == current_user %>
-      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-    <% end %>
-  <% end %>
-</div>
 <div class=<%= "favorite-" + @post.id.to_s %>>
   <%= render "public/favorites/btn", post: @post %>
 </div>
-<div class="book">
-  <%= form_with model: [@post, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+
+
+  <div class="comments-index">
+    <%= render "public/comments/index", post: @post, comment: @cooment %>
+  </div>
+
+  <%= render "public/comments/form", post: @post, comment: @comment %>
+
+<!--<div class="book">-->
+<!--  <#%= form_with model: [@post, @comment] do |f| %>-->
+<!--    <#%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>-->
+<!--    <#%= f.submit "送信する" %>-->
+<!--  <#% end %>-->
+<!--</div>-->
+
+<!--<#% @post.comments.each do |comment| %>-->
+<!--    <p><#%= image_tag comment.user.get_profile_image, size: "50x50" %></p>-->
+<!--    <#%= comment.created_at.strftime('%Y/%m/%d') %>-->
+<!--    <#%= comment.comment %>-->
+<!--    <#% if comment.user == current_user %>-->
+<!--      <#%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>-->
+<!--    <#% end %>-->
+<!--  <#% end %>-->
