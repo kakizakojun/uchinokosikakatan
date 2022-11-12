@@ -1,0 +1,43 @@
+<h2>Admin index</h2>
+
+<div class="container">
+  <div class="row">
+    <table class="table col-md-12">
+      <thead>
+        <tr>
+          <th>UserID</th>
+          <th>UserName</th>
+          <th>プライバシーステータス</th>
+          <th>ステータス<th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td>
+            <%= link_to admin_user_path(user.id), class: 'nav-link' do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td>
+            <% if user.is_active? %>
+              公開
+            <% else %>
+              非公開
+            <% end %>
+          </td>
+          <td>
+            <% if user.is_deleted? %>
+              無効
+            <% else %>
+              有効
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
