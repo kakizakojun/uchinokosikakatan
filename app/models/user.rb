@@ -20,6 +20,19 @@ class User < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_image.png'
   end
 
+  def follow(user)
+    relationships.create(followed_id: user.id)
+  end
+
+  def unfollow(user)
+    relationships.find_by(followed_id: user.id).destroy
+  end
+
+  def following?(user)
+    followings.include?(user)
+  end
+
+
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64

@@ -13,14 +13,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get 'users/mypage' => 'users#index', as: 'mypage'
-    get 'users/information/edit' => 'users#edit', as: 'edit_information'
-    patch 'users/information' => 'users#update', as: 'update_information'
     resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :comments,  only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
   end
-    resources :users, only: [:show]do
-    resources :relationships, only: [:create, :destroy]
+    resources :users, only: [:show, :edit, :update]do
+    resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end

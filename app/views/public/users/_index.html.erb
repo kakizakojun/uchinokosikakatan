@@ -1,0 +1,21 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+        <td><%= user.name %></td>
+        <td id= "relationship-<%= user.id %>">
+          <%= render "public/relationships/btn", user: user, page_name: "mypage" %>
+        </td>
+        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
