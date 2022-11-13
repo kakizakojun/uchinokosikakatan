@@ -1,0 +1,12 @@
+<h2>posts/show</h2>
+<div>
+  <!--<#%= image_tag @post.get.medias %>-->
+  <% @post.medias.each do |media| %>
+    <%= image_tag media, size: '140x100' %>
+  <% end %>
+  <p>
+    <% caption_and_tags_in_array(@post.caption).each do |word| %>
+      <%= word %>
+    <% end %>
+  </p>
+  <p>ユーザー名:<%= @post.user.name %></p>

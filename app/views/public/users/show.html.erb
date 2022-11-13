@@ -6,6 +6,15 @@
       <h2>user info</h2>
       <%= render "public/users/info", user: @user, page_name: "show" %>
     </div>
-    <div class="col-md-8"></div>
+    <div class="col-md-8">
+      <% @posts.each do |post| %>
+        <% post.medias.each do |media| %>
+          <%= link_to post_path(post.id) do %>
+          <%= image_tag media, size: '140x100' %>
+        <% end %>
+        <% end %>
+          <%= post.caption %>
+        <% end %>
+    </div>
   </div>
 </div>

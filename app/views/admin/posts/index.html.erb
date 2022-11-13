@@ -1,0 +1,12 @@
+<h2>Admin Post Index</h2>
+
+<div><%= @user.name %>さんの投稿一覧</div>
+
+<% @posts.each do |post| %>
+<% post.medias.each do |media| %>
+  <%= link_to admin_user_post_path(@user, post) do %>
+  <%= image_tag media, size: '140x100' %>
+<% end %>
+<% end %>
+  <%= post.caption %>
+<% end %>
