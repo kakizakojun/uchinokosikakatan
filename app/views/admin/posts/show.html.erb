@@ -1,6 +1,5 @@
-<h2>posts/show</h2>
+<h2>Admin/posts/show</h2>
 <div>
-  <!--<#%= image_tag @post.get.medias %>-->
   <% @post.medias.each do |media| %>
     <%= image_tag media, size: '140x100' %>
   <% end %>

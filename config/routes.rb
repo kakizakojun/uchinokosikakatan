@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get 'users/mypage' => 'users#index', as: 'mypage'
+    get '/post/tag', to: 'tags#index', as: 'posts_tag'
     resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :comments,  only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
@@ -30,9 +31,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'top' => 'homes#top', as: 'top'
-    resources :users, only: [:index, :show, :edit, :update] do
+    resources :users, only: [:index, :show, :edit, :update]
     resources :posts, only: [:index, :show]
-  end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

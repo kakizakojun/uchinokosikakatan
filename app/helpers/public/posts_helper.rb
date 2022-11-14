@@ -23,8 +23,8 @@ module Public::PostsHelper
     cap_arr.push(caption[(hash_point.last[1] + 1)..-1])
     cap_arr.map do |word|
       if word.match(Tag::TAG_CONDITIONS)
-        delete_pound_word = tag.pound_delete_at_tag(word)
-        link_to word, "/post/tag/" + delete_pound_word
+        delete_pound_word = Tag.pound_delete_at_tag(word)
+        link_to word, "/post/tag?tag=#{delete_pound_word}"
       else
         word
       end

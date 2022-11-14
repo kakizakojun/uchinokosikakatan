@@ -9,7 +9,11 @@
   <% end %>
   <% end %>
   <p>投稿ユーザー画像</p>
-  <p>caption:<%= post.caption %></p>
+  <p>
+    <% caption_and_tags_in_array(post.caption).each do |word| %>
+      <%= word %>
+    <% end %>
+  </p>
   <p>ユーザー名:<%= post.user.name %></p>
 </div>
 <% end %>
