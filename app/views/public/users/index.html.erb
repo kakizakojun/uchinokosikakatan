@@ -1,15 +1,48 @@
-<h2>user/index</h2>
-
 <div class="container">
   <p id="alert"><%= alert %></p>
   <div class="row">
     <div class="col-md-3">
-      <h2>user info</h2>
       <%= render "public/users/info", user: current_user %>
     </div>
+
     <div class="col-md-8 ofset-md-1">
-      <h2>users</h2>
-      <%= render "public/users/index", users: @users %>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link link-text" id="tl-tab" data-toggle= "tab" href="#tl" role="tab" aria-controls="tl" aria-selected="true">タイムライン</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-text" id="post-tab" data-toggle= "tab" href="#post" role="tab" aria-controls="post" aria-selected="true">自分の投稿</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-text" id="follower-tab" data-toggle= "tab" href="#follower" role="tab" aria-controls="follower" aria-selected="true">フォロー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-text" id="followed-tab" data-toggle= "tab" href="#followed" role="tab" aria-controls="followed" aria-selected="true">フォロワー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-text" id="favorite-tab" data-toggle= "tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">いいねした投稿</a>
+        </li>
+      </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="tl" role="tabpanel" aria-labellerdby="tl-tab">
+            <div>タイムライン</div>
+          </div>
+          <div class="tab-pane fade show" id="post" role="tabpanel" aria-labellerdby="post-tab">
+            <div>自分の投稿一覧</div>
+          </div>
+          <div class="tab-pane fade show" id="follower" role="tabpanel" aria-labellerdby="follower-tab">
+            <%= render "public/relationships/followers", users: @users %>
+          </div>
+          <div class="tab-pane fade show" id="followed" role="tabpanel" aria-labellerdby="followed-tab">
+            <div>フォロワー数</div>
+          </div>
+          <div class="tab-pane fade show" id="favorite" role="tabpanel" aria-labellerdby="favorite-tab">
+            <div>いいねした投稿一覧</div>
+          </div>
+        </div>
+
+      <!--<#%= render "public/users/index", users: @users %>-->
     </div>
   </div>
 </div>

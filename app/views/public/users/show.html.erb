@@ -8,15 +8,11 @@
     </div>
     <div class="col-md-8">
       <% @posts.each do |post| %>
-        <% post.medias.each do |media| %>
           <%= link_to post_path(post.id) do %>
-          <%= image_tag media, size: '140x100' %>
-          <% end %>
+          <%= image_tag post.medias[0], size: '140x100' %>
         <% end %>
-          <% caption_and_tags_in_array(post.caption).each do |word| %>
-            <%= word %>
-          <% end %>
       <% end %>
+      <%= link_to "いいねした投稿", favorites_user_path(@user) %>
     </div>
   </div>
 </div>

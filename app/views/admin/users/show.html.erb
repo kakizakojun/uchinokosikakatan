@@ -49,7 +49,7 @@
     <div class="col-md-7">
       <% @posts.each do |post| %>
         <% post.medias.each do |media| %>
-          <%= link_to post_path(post.id) do %>
+          <%= link_to admin_post_path(post.id) do %>
           <%= image_tag media, size: '140x100' %>
         <% end %>
         <% end %>

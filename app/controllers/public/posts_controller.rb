@@ -11,7 +11,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:user).where(users: {is_active: true})
+    @posts = Post.includes(:user).where(users: {is_active: true}).where(user_id: [current_user.id, *current_user.following_ids])
   end
 
   def show
@@ -32,6 +32,13 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+  def search
+    @q = params[:q]
+
+    @posts = Post.ransack(caption_cont: @q).result
+    @users = User.ransack(name_cont: @q).result
   end
 
   private

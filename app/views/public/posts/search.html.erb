@@ -1,0 +1,22 @@
+<% @posts.each do |post| %>
+<div>
+  <% post.medias.each do |media| %>
+  <%= link_to post_path(post.id) do %>
+  <%= image_tag media, size: '140x100' %>
+  <% end %>
+  <% end %>
+  <p>投稿ユーザー画像</p>
+  <p>
+    <% caption_and_tags_in_array(post.caption).each do |word| %>
+      <%= word %>
+    <% end %>
+  </p>
+  <p>ユーザー名:<%= post.user.name %></p>
+</div>
+<% end %>
+
+<% @users.each do |user| %>
+<div>
+  <p>ユーザー名:<%= user.name %></p>
+</div>
+<% end %>

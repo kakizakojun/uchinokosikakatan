@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :set_user, only: [:favorites]
 
   def index
     @users = User.all
@@ -22,7 +23,16 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def favorites
+    favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
+  end
+
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :profile, :profile_image, :is_active)
