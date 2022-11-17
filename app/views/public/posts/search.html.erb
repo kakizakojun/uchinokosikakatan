@@ -16,7 +16,7 @@
 <% end %>
 
 <% @users.each do |user| %>
-<div>
+  <%= image_tag user.get_profile_image, size: '100x100' %>
   <p>ユーザー名:<%= user.name %></p>
-</div>
+  <%= link_to "show", user, class: "user_#{user.id}" %>
 <% end %>

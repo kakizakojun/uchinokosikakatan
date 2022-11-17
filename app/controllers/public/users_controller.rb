@@ -3,6 +3,12 @@ class Public::UsersController < ApplicationController
 
   def index
     @users = User.all
+    if user_signed_in?
+      @user = current_user
+      favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
+      @favorite_posts = Post.find(favorites)
+    end
+    @posts = Post.includes(:user).where(users: {is_active: true}).where(user_id: [current_user.id, *current_user.following_ids])
   end
 
   def show

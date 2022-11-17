@@ -26,19 +26,19 @@
 
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="tl" role="tabpanel" aria-labellerdby="tl-tab">
-            <div>タイムライン</div>
+            <%= render "public/posts/index", posts: @posts %>
           </div>
           <div class="tab-pane fade show" id="post" role="tabpanel" aria-labellerdby="post-tab">
-            <div>自分の投稿一覧</div>
+            <%= render "public/posts/index", posts: @user.posts %>
           </div>
           <div class="tab-pane fade show" id="follower" role="tabpanel" aria-labellerdby="follower-tab">
-            <%= render "public/relationships/followers", users: @users %>
+            <%= render "public/relationships/followers", users: @user.followings %>
           </div>
           <div class="tab-pane fade show" id="followed" role="tabpanel" aria-labellerdby="followed-tab">
-            <div>フォロワー数</div>
+            <%= render "public/relationships/followings", users: @user.followers %>
           </div>
           <div class="tab-pane fade show" id="favorite" role="tabpanel" aria-labellerdby="favorite-tab">
-            <div>いいねした投稿一覧</div>
+            <%= render "public/posts/post", collection: @favorites_posts, post: @post %>
           </div>
         </div>
 

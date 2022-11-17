@@ -1,0 +1,5 @@
+<% posts.each do |post| %>
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post.medias[0], size: '140x100' %>
+    <% end %>
+  <% end %>
