@@ -8,9 +8,17 @@
     <tbody>
       <% users.each do |user| %>
         <tr>
-          <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
-          <td><%= user.name %></td>
-          <td id= "relationship-<%= user.id %>">
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.get_profile_image, size: '50x50' %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td id= "relationship-<3%= user.id %>">
             <%= render "public/relationships/btn", user: user, page_name: "mypage" %>
           </td>
           <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>

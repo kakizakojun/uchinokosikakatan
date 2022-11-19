@@ -20,6 +20,20 @@
       <%= link_to user.followers.count, user_followers_path(user), id: "followers-count-#{user.id}" %>
     </th>
   </tr>
+  <% if current_user != user %>
+    <tr></tr>
+    <% else %>
+    <tr>
+      <th>ステータス</th>
+      <th>
+        <% if user.is_active? %>
+          <span class="text-success">公開</span>
+        <% else %>
+          <span class="text-danger">非公開</span>
+        <% end %>
+      </th>
+    </tr>
+  <% end %>
 </table>
 
 <div class='row'>

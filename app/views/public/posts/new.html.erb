@@ -1,13 +1,12 @@
-<h2>新規投稿</h2>
+<div class="container">
+  <div class="row py-5">
+    <p class="text-danger"><%= flash[:alert]%></p>
+    <h2>新規投稿</h2>
+  </div>
+  <%= render 'layouts/errors', obj: @post %>
 
-<% if @post.errors.any? %>
-<%= @post.errors.count %>件のエラーが発生しました。
-<ul>
-  <% @post.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-  <% end %>
-</ul>
-<% end %>
+  <%= render'form', post: @post, submit: '投稿' %>
 
-<%= render'form', post: @post, submit: '投稿' %>
+</div>
+
 

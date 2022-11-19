@@ -1,29 +1,46 @@
-<h2>posts/show</h2>
-<div>
-  <!--<#%= image_tag @post.get.medias %>-->
-  <% @post.medias.each do |media| %>
-    <%= image_tag media, size: '140x100' %>
-  <% end %>
-  <p>
-    <% caption_and_tags_in_array(@post.caption).each do |word| %>
-      <%= word %>
-    <% end %>
-  </p>
-  <p>ユーザー名:<%= @post.user.name %></p>
-  <% if @post.user == current_user %>
-    <%= link_to "編集する", edit_post_path(@post) %>
-    <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"} %>
-  <% end %>
-</div>
-<div class=<%= "favorite-" + @post.id.to_s %>>
-  <%= render "public/favorites/btn", post: @post %>
-</div>
-  <p>コメント件数：<%= @post.comments.count %></p>
-
-
-  <div class="comments-index">
-    <%= render "public/comments/index", post: @post, comment: @cooment %>
+<div class="container">
+  <div class="row py-5">
+    <h2>投稿詳細</h2>
   </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div>
+        <% @post.medias.each do |media| %>
+          <%= image_tag media, size: '140x100' %>
+        <% end %>
+      </div>
+      <p class="pt-5"><%= @post.created_at.to_s(:datetime_jp) %></p>
+      <div class="pb-4">
+        <% caption_and_tags_in_array(@post.caption).each do |word| %>
+          <%= word %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to user_path(@post.user_id) do %>
+          <%= image_tag @post.user.get_profile_image, size: '50x50' %>
+          <%= @post.user.name %>
+        <% end %>
+      </div>
+      <% if @post.user == current_user %>
+        <div>
+          <%= link_to "編集する", edit_post_path(@post), class: 'btn btn-primary' %>
+          <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div class=<%= "favorite-" + @post.id.to_s %>>
+        <%= render "public/favorites/btn", post: @post %>
+      </div>
+      <div class="comments-index">
+        <%= render "public/comments/index", post: @post, comment: @cooment %>
+      </div>
+      <%= render "public/comments/form", post: @post, comment: @comment %>
+    </div>
+  </div>
+</div>
 
-  <%= render "public/comments/form", post: @post, comment: @comment %>
+
+
+  <!--<#%= image_tag @post.get.medias %>-->
 

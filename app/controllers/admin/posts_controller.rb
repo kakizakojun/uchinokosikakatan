@@ -1,8 +1,10 @@
 class Admin::PostsController < ApplicationController
 
+
   def index
-    @user = User.find(params[:user_id])
-    @posts = @user.posts
+    # @user = User.find(params[:user_id])
+    # @posts = @user.posts
+    @posts = Post.all.includes(:user).order(created_at: :DESC)
 
     # Post.where(user_id: user.id).includes(:user).order("create_at DEST")
   end

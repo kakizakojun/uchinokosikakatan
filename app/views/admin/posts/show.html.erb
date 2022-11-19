@@ -1,11 +1,29 @@
-<h2>Admin/posts/show</h2>
-<div>
-  <% @post.medias.each do |media| %>
-    <%= image_tag media, size: '140x100' %>
-  <% end %>
-  <p>
-    <% caption_and_tags_in_array(@post.caption).each do |word| %>
-      <%= word %>
-    <% end %>
-  </p>
-  <p>ユーザー名:<%= @post.user.name %></p>
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-sm-5">
+      <p class="font-weight-bold">投稿詳細</p>
+      <% @post.medias.each do |media| %>
+        <%= image_tag media, size: '140x100' %>
+      <% end %>
+    <div class="py-5">
+      <% caption_and_tags_in_array(@post.caption).each do |word| %>
+        <%= word %>
+      <% end %>
+    </div>
+    <p><%= image_tag @post.user.get_profile_image, size: '30x30' %><%= @post.user.name %></p>
+    </div>
+    <div class="col-sm-7 py-5">
+      <p class="font-weight-bold">コメント</p>
+      <% @post.comments.each do |comment| %>
+      <div>
+        <%= comment.created_at.strftime('%Y/%m/%d') %>&emsp;
+        <%= comment.comment %>&emsp;
+        <%= link_to admin_user_path(comment.user_id) do %>
+          <%= image_tag comment.user.get_profile_image, size: "50x50" %>
+        <% end %>
+      </div>
+      <% end %>
+  </div>
+  </div>
+</div>
+

@@ -21,6 +21,7 @@
           <% if admin_signed_in? %>
           <ul class="nav navbar-nav">
             <li><%= link_to "HOME", admin_users_path, class: 'nav-item nav-link text-light' %></li>
+            <li><%= link_to "投稿一覧", admin_posts_path, class: 'nav-item nav-link text-light' %></li>
             <li><%= link_to "User一覧", admin_users_path, class: 'nav-item nav-link text-light' %></li>
             <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete , class: 'nav-item nav-link text-light' %></li>
           <% elsif user_signed_in? %>

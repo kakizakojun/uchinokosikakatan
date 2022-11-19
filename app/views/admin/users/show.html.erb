@@ -1,11 +1,9 @@
-<h2>User Show</h2>
-
-
 <div class="container">
-  <%= @user.name %>さんの詳細
-  <div class="row">
+  <div class="row pt-5">
+    <h3 class="font-weight-bold"><%= @user.name %>さんの詳細</h3>
+  </div>
+  <div class="row pt-4">
     <div class="col-md-4">
-      <h2>user info</h2>
       <table class='table'>
         <tr><%= image_tag @user.get_profile_image, size: '100x100' %></tr>
         <tr>
@@ -20,9 +18,9 @@
           <th>プライバシーステータス</th>
           <th>
             <% if @user.is_active? %>
-              公開
+              <span class="text-success">公開</span>
             <% else %>
-              非公開
+              <span class="text-secondary">非公開</span>
             <% end %>
           </th>
         </tr>
@@ -30,9 +28,9 @@
           <th>ステータス</th>
           <th>
             <% if @user.is_deleted? %>
-              無効
+              <span class="text-danger">無効</span>
             <% else %>
-              有効
+              <span class="text-success">有効</span>
             <% end %>
           </th>
         </tr>
@@ -40,21 +38,30 @@
       <%= link_to edit_admin_user_path, class: "btn btn-outline-secondary btn-block " do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
-
-      <%= link_to admin_user_path, class: "btn btn-outline-primary btn-block" do %>
+      <%= link_to admin_users_path, class: "btn btn-outline-primary btn-block" do %>
         <i>User一覧</i>
       <% end %>
-
     </div>
     <div class="col-md-7">
+      <div class="row">
       <% @posts.each do |post| %>
-        <% post.medias.each do |media| %>
-          <%= link_to admin_post_path(post.id) do %>
-          <%= image_tag media, size: '140x100' %>
-        <% end %>
-        <% end %>
-          <%= post.caption %>
-        <% end %>
+      <div class="card-group pt-3 pl-3">
+        <div class="card">
+          <div class="card-img">
+            <%= link_to admin_post_path(post.id) do %>
+            <%= image_tag post.medias[0], size: '140x100' %>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <%= link_to admin_user_path(post.user_id) do %>
+            <%= image_tag post.user.get_profile_image, size: '30x30' %>
+            <%= post.user.name %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
     </div>
   </div>
 </div>

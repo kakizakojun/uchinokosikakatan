@@ -1,10 +1,29 @@
 <h2 class="text-center text-secondary mt-5"><%= "#" + @name %>のタグを含む投稿一覧</h2>
 
-<% @posts.each do |post| %>
-  <% post.medias.each do |media| %>
-    <%= link_to post_path(post.id) do %>
-    <%= image_tag media, size: '140x100' %>
-  <% end %>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <% @posts.each do |post| %>
+    <div class="card-group pt-3 pl-3">
+      <div class="card">
+        <div class="card-img-top">
+          <% post.medias.each do |media| %>
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag medias[0], size: '140x100' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <%= link_to user_path(post.user_id) do %>
+            <%= image_tag post.user.get_profile_image, size: '20x20' %>
+            <%= post.user.name %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+
+
 

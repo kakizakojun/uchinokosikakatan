@@ -1,23 +1,20 @@
 <div class="container">
   <div class="row">
-    <h2>Topページ</h2>
-    <div class="col-md-12">
-      <div class="card"></div>
-      <div class="row">
+    <div class="col-md-12 pt-4">
+      <div class="img text-center">
+        <%= image_tag "ウチ勝top.png", size: '1000x400', class: 'img-fluid' %>
+      </div>
+      <div class="row text-center pt-3">
         <div class="col-4">
           <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-success' %>
         </div>
         <div class="col-4">
-          <%= link_to "userログイン", new_user_session_path, class: "btn btn-primary" %>
+          <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
         </div>
         <div class="col-4">
-          <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: 'btn btn-secondary', method: :post %>
+          <%= link_to "ゲストログイン", users_guest_sign_in_path, class: 'btn btn-secondary', method: :post %>
         </div>
       </div>
-
-
-      <!--<div><#%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>-->
-      <!--<div><#%= link_to "新規投稿", new_post_path %></div>-->
     </div>
   </div>
 </div>

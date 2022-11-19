@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="row pt-3">
-    <% @posts.each do |post| %>
-    <div class="card-group pl-3">
+  <div class="row">
+    <% @favorite_posts.each do |post| %>
+    <div class="card-group pt-2 pl-2">
       <div class="card">
         <div class="card-img">
           <%= link_to post_path(post.id) do %>
-            <%= image_tag post.medias[0], size: '160x120' %>
+            <%= image_tag post.medias[0], size: '140x100' %>
           <% end %>
         </div>
         <div class="card-body">
@@ -18,6 +18,8 @@
     </div>
     <% end %>
   </div>
-  <%= render 'public/users/index', users: @users %>
 </div>
-  
+
+
+
+<!--<#%= link_to post.user.name, user_path(post.user.id) %>-->
