@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row py-5">
-    <h2>Adminログイン</h2>
+    <h2 class="font-weight-bold text-secondary">Adminログイン</h2>
   </div>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group row">
     <div class="col-sm-2">
-      <%= f.label :email %>
+      <%= f.label :email, class: 'font-weight-bold' %>
     </div>
     <div class="col-sm-10">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
@@ -13,7 +13,7 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-2">
-      <%= f.label :password %>
+      <%= f.label :password, class: 'font-weight-bold' %>
     </div>
     <div class="col-sm-10">
       <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>

@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="row py-5">
-    <h2>投稿詳細</h2>
+  <p class="font-weight-bold text-success pt-5"><%= flash[:notice] %></p>
+  <div class="row py-3">
+    <h2 class="font-weight-bold text-secondary">投稿詳細</h2>
   </div>
   <div class="row">
     <div class="col-sm-6">
@@ -11,6 +12,7 @@
       </div>
       <p class="pt-5"><%= @post.created_at.to_s(:datetime_jp) %></p>
       <div class="pb-4">
+        <p class="font-weight-bold">caption</p>
         <% caption_and_tags_in_array(@post.caption).each do |word| %>
           <%= word %>
         <% end %>

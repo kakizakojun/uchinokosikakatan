@@ -38,12 +38,24 @@
 
 <div class='row'>
   <% if current_user != user %>
-    <div id="relationship-<%= @user.id %>">
+    <div id="relationship-<%= user.id %>">
       <%= render "public/relationships/btn", user: user, page_name: page_name %>
     </div>
   <% else %>
     <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
       <i class="fas fa-user-cog"></i>
     <% end %>
+  <% end %>
+  <% unless @user.id == current_user.id %>
+    <% if @is_room == true %>
+    <%= link_to 'メッセージ', room_path(@room_id), class: 'btn btn-secondary ml-3' %>
+  <% else %>
+    <%= form_with model: @room do |f| %>
+      <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, value: @user.id %>
+      <% end %>
+    <%= f.submit "メッセージ", class: 'btn btn-secondary ml-3' %>
+    <% end %>
+  <% end %>
   <% end %>
 </div>

@@ -18,7 +18,7 @@
               <%= user.name %>
             <% end %>
           </td>
-          <td id= "relationship-<3%= user.id %>">
+          <td id= "relationship-<%= user.id %>">
             <%= render "public/relationships/btn", user: user, page_name: "mypage" %>
           </td>
           <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
@@ -27,5 +27,5 @@
     </tbody>
   </table>
 <% else %>
-  <p>ユーザーはいません</p>
+  <p class="font-weight-bold pt-3">フォローしているユーザーはいません</p>
 <% end %>

@@ -16,7 +16,8 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to mypage_path
+    flash[:notice] = 'ゲストユーザーとしてログインしました。'
   end
 
 
@@ -24,10 +25,11 @@ class Public::SessionsController < Devise::SessionsController
 
   def user_state
     @user = User.find_by(email: params[:user][:email])
-    retrn if !@user
+    return if !@user
     if @user.valid_password?(params[:user][:password])&& (@user.is_deleted == true)
       # flash[:notice] = "アカウント凍結中です。お問い合わせください。"
-      redirect_to "/", notice: "アカウント凍結中です。お問い合わせください"
+      redirect_to "/"
+      flash[:alert] = "アカウント凍結中です。お問い合わせください"
     else
       flash[:notice] = "項目を入力してください"
     end

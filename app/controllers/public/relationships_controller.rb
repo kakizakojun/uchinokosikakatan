@@ -10,8 +10,8 @@ class Public::RelationshipsController < ApplicationController
     elsif params[:from] == "mypage"
       current_user
     end
-
     render 'replace_btn'
+    @user.create_notification_follow!(current_user)
   end
 
   def destroy
@@ -23,7 +23,6 @@ class Public::RelationshipsController < ApplicationController
     elsif params[:from] == "mypage"
       current_user
     end
-
     render 'replace_btn'
   end
 

@@ -10,17 +10,52 @@ class Public::UsersController < ApplicationController
       favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
       @favorite_posts = Post.find(favorites)
     end
+    
     @posts = Post.includes(:user).where(users: {is_active: true}).where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :DESC)
+    @notifications = current_user.passive_notifications.all
+    @notifications.where(checked: false).each do |notification|
+      notification.update(checked: true)
+    end
+    
+    current_enties = current_user.entries
+    my_room_id = []
+    current_enties.each do |entry|
+      my_room_id << entry.room.id
+    end
+    
+    @another_enties = Entry.where(room_id: my_room_id).where.not(user_id: current_user.id)
   end
 
   def show
+    if params[:id].to_i == current_user.id
+      redirect_to mypage_path
+    end
     if  user_signed_in?
       @user = User.find(params[:id])
       favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
       @favorite_posts = Post.find(favorites)
     end
+    
     @posts = Post.includes(:user).order(created_at: :DESC)
     @posts = @user.posts
+    @user = User.find(params[:id])
+    @current_entry = Entry.where(user_id: current_user.id)
+    @another_entry = Entry.where(user_id: @user.id)
+    
+    unless @user.id == current_user.id
+      @current_entry.each do |current|
+        @another_entry.each do |another|
+          if current.room_id == another.room_id
+            @is_room = true
+            @room_id = current.room_id
+          end
+        end
+      end
+      unless @is_room
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def edit
@@ -29,10 +64,13 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if current_user.name != "ゲスト"
+      @user.update(user_params)
       redirect_to mypage_path
+      flash[:notice] = "編集を保存しました。"
     else
-      render "edit"
+      flash[:alert] = "ゲストユーザーの編集はできません。"
+      render :edit
     end
   end
 

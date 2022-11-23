@@ -2,7 +2,7 @@
 <%= form_with model: post do |f| %>
 <div class="form-group row">
   <div class="col-sm-4">
-    <%= f.label :画像 %>
+    <%= f.label :画像, class: 'font-weight-bold' %>
   </div>
   <div class="col-sm-8">
     <%= f.file_field :medias, multiple: true %>
@@ -10,7 +10,7 @@
 </div>
 <div class="form-group row">
   <div class="col-sm-4">
-    <%= f.label :説明 %>
+    <%= f.label :説明, class: 'font-weight-bold' %>
   </div>
   <div class="col-sm-8">
     <%= f.text_area :caption, rows: "5", class: 'form-control' %>

@@ -1,4 +1,6 @@
 <div class="container">
+  <h2 class="text-center text-secondary mt-5">captionに<%= @q %>を含む投稿一覧</h2>
+  <% if @posts.exists? %>
   <div class="row pt-3">
     <% @posts.each do |post| %>
     <div class="card-group pl-3">
@@ -18,6 +20,14 @@
     </div>
     <% end %>
   </div>
+  <% else %>
+    <p class="font-weight-bold text-center pt-3">captionに<%= @q %>を含む投稿はありません。</p>
+  <% end %>
+  <h2 class="text-center text-secondary mt-5"><%= @q %>を含む名前のユーザー一覧</h2>
+  <% if @users.exists? %>
   <%= render 'public/users/index', users: @users %>
-</div>
-  
+  <% else %>
+  <p class="font-weight-bold text-center pt-3"><%= @q %>を含む名前のユーザーはいません。</p>
+  <% end %>
+  </div>
+

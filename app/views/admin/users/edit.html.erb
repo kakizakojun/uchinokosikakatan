@@ -1,18 +1,20 @@
-<h2>User Edit</h2>
+
 
 <div class="container">
-  <%= @user.name %>さんの編集画面
+  <div class="row pt-5">
+    <div class="font-weight-bold"><%= @user.name %>さんの編集画面</div>
+  </div>
   <%= form_with model: @user, url:  admin_user_path(@user.id) do |f| %>
-  <div class="form-group row  justify-content-center">
-    <div class="col-sm-2"><%= f.label :name, class: 'col-form-label' %></div>
+  <div class="form-group row pt-5  justify-content-center">
+    <div class="col-sm-2"><%= f.label :name, class: 'col-form-label font-weight-bold' %></div>
     <div class="col-sm-5"><%= f.text_field :name, class: 'form-control' %></div>
   </div>
   <div class="form-group row  justify-content-center">
-    <div class="col-sm-2"><%= f.label :profile, class: 'col-form-label' %></div>
+    <div class="col-sm-2"><%= f.label :profile, class: 'col-form-label font-weight-bold' %></div>
     <div class="col-sm-5"><%= f.text_area :profile, class: 'form-control' %></div>
   </div>
   <div class="form-group row  justify-content-center">
-    <div class="col-sm-2"><%= f.label :Userステータス %></div>
+    <div class="col-sm-2 font-weight-bold"><%= f.label :Userステータス %></div>
     <div class="col-sm-5">
       <%= f.radio_button :is_deleted, false, {:checked => true} %>有効
       <%= f.radio_button :is_deleted, true %>無効

@@ -1,21 +1,21 @@
 <div class="container">
   <div class="row">
     <% posts.each do |post| %>
-    <div class="card-group pt-2 pl-2">
-      <div class="card">
-        <div class="card-img">
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.medias[0], size: '140x100' %>
-        <% end %>
+      <div class="card-group pt-3 pr-3">
+        <div class="card">
+          <div class="card-img">
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.medias[0], size: '140x100' %>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <%= link_to user_path(post.user_id) do %>
+              <%= image_tag post.user.get_profile_image, size: '30x30' %>
+              <%= post.user.name %>
+            <% end %>
+          </div>
         </div>
-      <div class="card-body">
-        <%= link_to user_path(post.user_id) do %>
-          <%= image_tag post.user.get_profile_image, size: '30x30' %>
-          <%= post.user.name %>
-        <% end %>
       </div>
-      </div>
-    </div>
     <% end %>
   </div>
 </div>

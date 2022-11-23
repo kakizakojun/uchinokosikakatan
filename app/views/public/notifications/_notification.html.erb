@@ -1,0 +1,33 @@
+<div class="container">
+<div class="row">
+<% notifications.each do |notification|%>
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class="col-sm-12  pt-3 border-bottom">
+    <span>
+      <%= link_to user_path(visitor) do %>
+        <%= image_tag visitor.get_profile_image, size: '30x30' %>
+        <%= visitor.name %>
+      <% end %>
+      <%= "さんが" %>
+    </span>
+      <% case notification.action %>
+      <% when 'follow' then %>
+        <%= "あなたをフォローしました" %>
+      <% when 'favorite' then %>
+        <%= link_to 'あなたの投稿', notification.post, class: 'font-weight-bold' %>
+        <%= "にいいねしました" %>
+      <% when 'comment' then %>
+        <%= link_to 'あなたの投稿', notification.post, class: 'font-weight-bold' %>
+        <%= "にコメントしました。" %>
+        <div class="text-muted ml-4">
+          <%= Comment.find_by(id: notification.comment_id)&.comment %>
+        </div>
+      <% end %>
+
+        <div class="small text-muted text-right"><%= time_ago_in_words(notification.created_at).upcase %>前</div>
+</div>
+  <% end %>
+  </div>
+  </div>

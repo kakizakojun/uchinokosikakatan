@@ -1,10 +1,11 @@
 
 <div class="container">
+  <p class="pt-2"></p>
   <div class="row py-5">
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <%= render "public/users/info", user: @user, page_name: "show" %>
     </div>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active link-text" id="post-tab" data-toggle= "tab" href="#post" role="tab" aria-controls="post" aria-selected="true"><%= @user.name %>さんの投稿</a>

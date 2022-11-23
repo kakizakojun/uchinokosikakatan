@@ -1,10 +1,9 @@
 <div class="container">
-  <p id="alert"><%= alert %></p>
+    <p class="font-weight-bold text-success pt-2"><%= flash[:notice] %></p>
   <div class="row py-5">
     <div class="col-md-3">
       <%= render "public/users/info", user: current_user %>
     </div>
-
     <div class="col-md-9">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -22,6 +21,12 @@
         <li class="nav-item">
           <a class="nav-link link-text" id="favorite-tab" data-toggle= "tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">いいねした投稿</a>
         </li>
+        <li>
+          <a class="nav-link link-text" id="messages-tab" data-toggle= "tab" href="#messages" role="tab" aria-controls="messages" aria-selected="true">メッセージ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-text" id="notification-tab" data-toggle= "tab" href="#notification" role="tab" aria-controls="notification" aria-selected="true">通知</a>
+        </li>
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="tl" role="tabpanel" aria-labellerdby="tl-tab">
@@ -38,6 +43,12 @@
         </div>
         <div class="tab-pane fade show" id="favorite" role="tabpanel" aria-labellerdby="favorite-tab">
           <%= render "public/posts/favorite", collection: @favorites_posts, post: @post %>
+        </div>
+        <div class="tab-pane fade show" id="messages" role="tabpanel" aria-labellerdby="messages-tab">
+          <%= render "public/rooms/index", another_enties: @another_enties %>
+        </div>
+        <div class="tab-pane fade show" id="notification" role="tabpanel" aria-labellerdby="notification-tab">
+          <%= render "public/notifications/index", notifications: @notifications %>
         </div>
       </div>
     </div>

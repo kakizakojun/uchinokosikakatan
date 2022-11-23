@@ -14,13 +14,14 @@ Rails.application.routes.draw do
     root 'homes#top'
     get 'users/mypage' => 'users#index', as: 'mypage'
     get '/post/tag', to: 'tags#index', as: 'posts_tag'
+    resources :notifications, only: [:index]
     resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :comments,  only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
         collection do
           get 'search'
         end
-  end
+    end
     resources :users, only: [:show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
@@ -28,7 +29,9 @@ Rails.application.routes.draw do
       member do
         get :favorites
       end
-  end
+    end
+    resources :messages, only: [:create]
+    resources :rooms, only:[:create, :index, :show]
   end
 
   devise_for :admin,skip:[:registrations, :passwords], controllers:{

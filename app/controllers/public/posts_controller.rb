@@ -12,7 +12,7 @@ class Public::PostsController < ApplicationController
     if current_user.name != "ゲスト"
     @post.save ? (redirect_to post_path(@post)) : (render :new)
     else
-      flash[:alert] = "新規登録またはログインが必要です"
+      flash[:alert] = "新規投稿には新規登録またはログインが必要です"
       render :new
     end
   end
@@ -33,7 +33,12 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params) ? (redirect_to post_path(@post)) : (render :edit)
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+      flash[:notice] = "編集を保存しました。"
+    else
+      render :edit
+    end
   end
 
   def destroy
