@@ -1,6 +1,6 @@
 
 <div class="container">
-  <p class="pt-2"></p>
+  <p class="pt-2 font-weight-bold text-danger"><%= flash[:alert] %></p>
   <div class="row py-5">
     <div class="col-md-3">
       <%= render "public/users/info", user: @user,is_room: @is_room,room_id: @room_id,room: @room,entry: @entry, page_name: "show" %>
