@@ -4,33 +4,36 @@
     <h2 class="font-weight-bold text-secondary">投稿詳細</h2>
   </div>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div>
         <% @post.medias.each do |media| %>
           <%= image_tag media, size: '140x100' %>
         <% end %>
       </div>
-      <p class="pt-5"><%= @post.created_at.to_s(:datetime_jp) %></p>
+      <p class="pt-5 border-bottom"><%= @post.created_at.to_s(:datetime_jp) %></p>
       <div class="pb-4">
         <p class="font-weight-bold">caption</p>
-        <% caption_and_tags_in_array(@post.caption).each do |word| %>
+        <p class="border-bottom"><% caption_and_tags_in_array(@post.caption).each do |word| %>
           <%= word %>
         <% end %>
+        </p>
       </div>
-      <div>
+      <div class="border-bottom">
         <%= link_to user_path(@post.user_id) do %>
           <%= image_tag @post.user.get_profile_image, size: '50x50' %>
           <%= @post.user.name %>
         <% end %>
       </div>
       <% if @post.user == current_user %>
-        <div>
+        <div class="pt-2">
           <%= link_to "編集する", edit_post_path(@post), class: 'btn btn-primary' %>
           <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: 'btn btn-danger' %>
         </div>
       <% end %>
     </div>
+    <div class="col-sm-2 ofset"></div>
     <div class="col-sm-6">
+      <p class="font-weight-bold text-danger"><%= flash[:alert] %>
       <div class=<%= "favorite-" + @post.id.to_s %>>
         <%= render "public/favorites/btn", post: @post %>
       </div>

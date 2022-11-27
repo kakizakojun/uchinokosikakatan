@@ -2,6 +2,7 @@
   <div class="row py-5">
     <h2 class="font-weight-bold text-secondary">Adminログイン</h2>
   </div>
+  <p class="font-weight-bold text-danger"><%= alert %></p>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group row">
     <div class="col-sm-2">
