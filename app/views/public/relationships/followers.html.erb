@@ -6,7 +6,7 @@
     <% if @users.exists? %>
       <%= render 'public/users/index', users: @users %>
     <% else %>
-      <p>ユーザーはいません</p>
+      <p class="font-weight-bold">ユーザーはいません</p>
     <% end %>
   </div>
 </div>

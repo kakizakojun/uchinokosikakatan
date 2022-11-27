@@ -38,7 +38,6 @@
           <% else %>
             <li><%= link_to "HOME", root_path, class: 'nav-item nav-link text-light' %></li>
             <li><%= link_to "新規登録", new_user_registration_path, class: 'nav-item nav-link text-light' %></li>
-            <li><%= link_to "Adminログイン", new_admin_session_path, class: 'nav-item nav-link text-light' %></li>
             <li><%= link_to "ログイン", new_user_session_path, class: 'nav-item nav-link text-light' %></li>
           <% end %>
           </ul>
@@ -46,7 +45,7 @@
       </div>
     </header>
     <%= yield %>
-    
+
     <footer class="bg-info pt-3 fixed-bottom">
       <div></div>
     </footer>
