@@ -7,7 +7,7 @@ class Public::MessagesController < ApplicationController
     if message.save
       redirect_to room_path(message.room)
     else
-      redirect_back(fallback_lacation: room_path)
+      redirect_to room_path(message.room)
     end
   end
 

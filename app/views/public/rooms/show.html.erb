@@ -29,16 +29,15 @@
       </div>
       <div class="row pt-3">
         <div class="col-sm-7 offset-sm-1">
-          <div class="chat-form-box">
             <%= form_with model: @message do |f| %>
             <div class="chat-form-group">
-              <%= f.text_field :body, class: 'form-control' %>
+              <%= f.text_field :body, class: 'form-control', placeholder: "メッセージをここに" %>
               <%= f.hidden_field :room_id, value: @room.id %>
+              
             </div>
-          </div>
-        </div>
-              <%= f.submit "送信", class: 'btn btn-outline-success' %>
+            <%= f.submit "送信", class: 'btn btn-outline-success' %>
             <% end %>
+        </div>
       </div>
     </div>
   </div>
