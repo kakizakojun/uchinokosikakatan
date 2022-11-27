@@ -2,16 +2,21 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @user = User.find(params[:user_id])
-    current_user.follow(@user)
-    @page_name = params[:from]
-    @info_user = if params[:from] == "show"
-      @user
-    elsif params[:from] == "mypage"
-      current_user
+    if current_user.email != "guest@example.com"
+      @user = User.find(params[:user_id])
+      current_user.follow(@user)
+      @page_name = params[:from]
+      @info_user = if params[:from] == "show"
+        @user
+      elsif params[:from] == "mypage"
+        current_user
+      end
+      render 'replace_btn'
+      @user.create_notification_follow!(current_user)
+    else
+      flash[:alert] = "フォローするには新規登録、ログインが必要です。"
+      redirect_to :mypage
     end
-    render 'replace_btn'
-    @user.create_notification_follow!(current_user)
   end
 
   def destroy

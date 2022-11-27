@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    if current_user.name != "ゲスト"
+    if current_user.email != "guest@example.com"
     @post.save ? (redirect_to post_path(@post)) : (render :new)
     else
       flash[:alert] = "新規投稿には新規登録またはログインが必要です"
@@ -44,7 +44,8 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to mypage_path, notice: "投稿を削除しました。"
+    redirect_to mypage_path
+    flash[:alert] = "投稿を削除しました。"
   end
 
   def search

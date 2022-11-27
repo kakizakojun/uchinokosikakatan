@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :DESC)
   end
 
   def edit
@@ -17,7 +17,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "ユーザーの編集を保存しました。"
+      flash[:notice] = "#{@user.name}さんの編集を保存しました。"
       redirect_to admin_user_path(@user.id)
     else
       render edit

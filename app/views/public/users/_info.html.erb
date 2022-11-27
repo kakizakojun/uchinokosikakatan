@@ -46,16 +46,16 @@
       <i class="fas fa-user-cog"></i>
     <% end %>
   <% end %>
-  <% unless @user.id == current_user.id %>
-    <% if @is_room == true %>
-    <%= link_to 'メッセージ', room_path(@room_id), class: 'btn btn-secondary ml-3' %>
+  <% unless user.id == current_user.id %>
+    <% if is_room == true %>
+    <%= link_to 'メッセージ', room_path(room_id), class: 'btn btn-secondary ml-3' %>
   <% else %>
-    <%= form_with model: @room do |f| %>
-      <%= fields_for @entry do |e| %>
-        <%= e.hidden_field :user_id, value: @user.id %>
+    <%= form_with model: room do |f| %>
+      <%= fields_for entry do |e| %>
+        <%= e.hidden_field :user_id, value: user.id %>
       <% end %>
-    <%= f.submit "メッセージ", class: 'btn btn-secondary ml-3' %>
+        <%= f.submit "メッセージ", class: 'btn btn-secondary ml-3' %>
+      <% end %>
     <% end %>
-  <% end %>
   <% end %>
 </div>

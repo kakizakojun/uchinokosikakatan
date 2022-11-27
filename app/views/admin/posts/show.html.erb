@@ -6,7 +6,8 @@
       <% @post.medias.each do |media| %>
         <%= image_tag media, size: '140x100' %>
       <% end %>
-      <div class="py-5">
+      <p class="pt-5"><%= @post.created_at.to_s(:datetime_jp) %></p>
+      <div>
         <p class="font-weight-bold">caption</p>
         <div>
           <% caption_and_tags_in_array(@post.caption).each do |word| %>

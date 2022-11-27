@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="row pt-2">
+  <div class="row">
+    <% if another_enties.exists? %>
     <% another_enties.each do |entry| %>
       <div class="col-sm-12  pt-3 border-bottom">
         <%= link_to room_path(entry.room) do %>
@@ -12,6 +13,9 @@
           </div>
         <% end %>
       </div>
+    <% end %>
+    <% else %>
+      <p class="font-weight-bold pt-3">メッセージはありません。</p>
     <% end %>
   </div>
 </div>

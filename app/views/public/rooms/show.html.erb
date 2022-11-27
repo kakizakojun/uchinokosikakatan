@@ -4,38 +4,40 @@
   </div>
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
-      <% @messages.each do |message| %>
-        <% if message.user_id == current_user.id %>
-          <div class="mycomment pl-5">
-            <p>
-              <%= image_tag message.user.get_profile_image, size: '30x30' %>
-              (<%= message.user.name %>)
-              <%= message.body %>
-            </p>
-          </div>
-        <% else %>
-          <div class="fukidasi text-right pr-5">
-            <div class="faceicon">
-              <%= message.body %>
-              <%= image_tag message.user.get_profile_image, size: '30x30' %>
-              (<%= message.user.name %>)
+      <div class="border bg-info">
+        <% @messages.each do |message| %>
+          <% if message.user_id == current_user.id %>
+            <div class="mycomment">
+              <p>
+                <%= link_to user_path(message.user_id) do %>
+                  <%= image_tag message.user.get_profile_image, size: '30x30' %>
+                <% end %>
+                <%= message.body %>
+              </p>
             </div>
-          </div>
+          <% else %>
+            <div class="fukidasi text-right">
+              <div class="faceicon">
+                <%= message.body %>
+                <%= link_to user_path(message.user_id) do %>
+                  <%= image_tag message.user.get_profile_image, size: '30x30' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
       <div class="row pt-3">
         <div class="col-sm-7 offset-sm-1">
           <div class="chat-form-box">
             <%= form_with model: @message do |f| %>
-              <div class="chat-form-group">
-                <%= f.text_field :body, class: 'form-control' %>
-                <%= f.hidden_field :room_id, value: @room.id %>
-              </div>
-              </div>
-              </div>
-              <div class="col-sm-4">
-                <%= f.submit "送信", class: 'btn btn-outline-success' %>
-              </div>
+            <div class="chat-form-group">
+              <%= f.text_field :body, class: 'form-control' %>
+              <%= f.hidden_field :room_id, value: @room.id %>
+            </div>
+          </div>
+        </div>
+              <%= f.submit "送信", class: 'btn btn-outline-success' %>
             <% end %>
       </div>
     </div>

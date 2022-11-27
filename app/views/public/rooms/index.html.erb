@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row pt-5">
-  <% @another_enties.each do |entry| %>
-    <div class="col-sm-12  pt-3 border-bottom">
-      <%= link_to room_path(entry.room) do %>
-        <div>
-          <%= link_to user_path(entry.user) do %>
-            <%= image_tag entry.user.get_profile_image, size: '50x50' %>
-            <%= entry.user.name %>
-            <span class="pl-5"><%= Message.find_by(id: entry.room.message_ids.last)&.body %></span>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% @another_enties.each do |entry| %>
+      <div class="col-sm-12  pt-3 border-bottom">
+        <%= link_to room_path(entry.room) do %>
+          <div>
+            <%= link_to user_path(entry.user) do %>
+              <%= image_tag entry.user.get_profile_image, size: '50x50' %>
+              <%= entry.user.name %>
+              <span class="pl-5"><%= Message.find_by(id: entry.room.message_ids.last)&.body %></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
