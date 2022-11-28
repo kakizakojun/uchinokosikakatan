@@ -19,7 +19,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.all.includes(:user).where(users: {is_active: true}).order(created_at: :DESC)
-    # @posts = Post.includes(:user).where(users: {is_active: true})
   end
 
   def show
