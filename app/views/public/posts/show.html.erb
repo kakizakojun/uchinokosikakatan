@@ -4,10 +4,15 @@
     <h2 class="font-weight-bold text-secondary">投稿詳細</h2>
   </div>
   <div class="row">
-    <div class="col-sm-4">
-      <div>
+    <div class="col-sm-6">
+      <div class="row">
         <% @post.medias.each do |media| %>
-          <%= image_tag media, size: '140x100' %>
+          <div class="col-4">
+            <%= image_tag media, size: '140x100' %><br>
+            <% Tag.where(id: MediaTag.where(key: media.key).pluck(:tag_id)).each do |tag| %>
+              <span class="small"><%= tag.name %></span><br>
+            <% end %>
+          </div>
         <% end %>
       </div>
       <p class="pt-5 border-bottom"><%= @post.created_at.to_s(:datetime_jp) %></p>
@@ -31,7 +36,7 @@
         </div>
       <% end %>
     </div>
-    <div class="col-sm-2 ofset"></div>
+    <!--div class="col-sm-2 ofset"></div-->
     <div class="col-sm-6">
       <p class="font-weight-bold text-danger"><%= flash[:alert] %>
       <div class=<%= "favorite-" + @post.id.to_s %>>

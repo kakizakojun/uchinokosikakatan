@@ -3,6 +3,9 @@ class Tag < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :posts, through: :post_tags
 
+  # has_many :media_tags, dependent: :destroy
+  # has_many :medias, through: :media_tags, foren_key: "", source:
+
   LEAD_POUND = "[＃#]"
   TAG_CONDITIONS = %r{#{LEAD_POUND}[\w\p{Han}ぁ-ヶｦ-ﾟー]+}
 

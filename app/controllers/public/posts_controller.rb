@@ -10,7 +10,18 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if current_user.email != "guest@example.com"
-    @post.save ? (redirect_to post_path(@post)) : (render :new)
+      media_tags = {}
+      if @post.save
+        @post.medias.each do |media|
+          media_tags[media.key] = Vision.get_image_data(media) #{key => ["tag1", "tag2", "tag3"]}
+        end
+        media_tags.each do |key, tag_list|
+          MediaTag.save_tags(tag_list, key)
+        end
+        redirect_to post_path(@post)
+      else
+        render :new
+      end
     else
       flash[:alert] = "新規投稿には新規登録またはログインが必要です"
       render :new
