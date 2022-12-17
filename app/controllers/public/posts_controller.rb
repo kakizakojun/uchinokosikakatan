@@ -43,7 +43,14 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    media_tags = {}
     if @post.update(post_params)
+      @post.medias.each do |media|
+        media_tags[media.key] = Vision.get_image_data(media)
+      end
+      media_tags.each do |key, tag_list|
+        MediaTag.save_tags(tag_list, key)
+      end
       redirect_to post_path(@post)
       flash[:notice] = "編集を保存しました。"
     else
